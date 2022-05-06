@@ -311,11 +311,13 @@
       <field type="uint16_t" name="payload_state" enum="PAYLOAD_STATE" display="bitmask" print_format="0x%04x">Bitmap showing the states of payload. Value of 0: state is false. Value of 1: state is true.</field>
     </message>
     <message id="44207" name="PAYLOAD_CHANGE">
-      <description>Broadcast on change of Payload List, specifies the change (added/removed) and ID of the payload.</description>
+      <description>Broadcast on change of Payload List, specifies the change (added/removed) and ID of the payload. This message should be sent out on every change as well as regularly (e.g. every 10s or 60s).</description>
       <field type="uint8_t" name="target_system">System ID</field>
       <field type="uint8_t" name="target_component">Component ID</field>
-      <field type="uint8_t" name="payload_change">Payload ID change, value 1 : ID Added, value 0 : ID Removed</field>
-      <field type="uint8_t" name="payload_id">ID of new payload added.</field>
+      <field type="uint8_t" name="payload_change">Payload ID change, value 1 : ID Added, value 0 : ID Removed, value 255: no change</field>
+      <field type="uint8_t" name="payload_id">ID of new payload added or removed.</field>
+      <extensions/>
+      <field type="uint8_t" name="change_counter">Counter incremented on each change.</field>
     </message>
     <message id="44300" name="WATER_CURRENT">
       <description>Water current values. Note: Calculated Water current = (Vehicle Velocity - Measured Current).</description>
